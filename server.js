@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 // parse application/json 
 app.use(express.json());
 
-const whitelist = [undefined, 'http://localhost:5500', 'http://127.0.0.1:5500', 'http://localhost:3000','http://localhost:80']
+const whitelist = [undefined, 'http://localhost:5500', 'http://127.0.0.1:5500', 'http://localhost:3000']
 const corsOptions = {
     credentials: true,
     origin: function(origin, cb){
@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 
 app.use('/items', require(__dirname+'/items'))
 app.use('/category', require(__dirname+'/category'))
-
+app.use('/comment',require(__dirname+'/comment'))
 
 
 // set port, listen for requests
