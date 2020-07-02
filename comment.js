@@ -115,7 +115,7 @@ router.put('/:id?', upload.none(), (req, res)=>{
         body: req.body
     }
     let id = req.params.id;
-   console.log(id)
+   //console.log(id)
     // if(! id){
     //     output.error = '沒有主鍵';
     //     return res.json(output);

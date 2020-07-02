@@ -73,6 +73,15 @@ router.get('/couponused/:memberId?',(req,res)=>{
         })
 })
 
+//新增折價券資料July2ed
+router.post('/coupon/:memberId?',(req,res)=>{
+    const memberId = req.params.memberId || ''
+    //console.log(req.params.memberId)
+    db.query(`INSERT INTO rel_coupon_member SET memberId= '${memberId}' , discountID='D309' , use_times=0`)
+        .then(res.send(`ok, ${memberId}`)
+        )
+})
+
 //真正存圖片
 router.post('/try-upload2', upload.single('avatar'), (req, res)=>{
     res.json({
