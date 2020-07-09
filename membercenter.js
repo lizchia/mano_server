@@ -91,6 +91,42 @@ router.post('/marketcoupon/:memberId?',(req,res)=>{
         )
 })
 
+//顯示文章資料July9
+router.get('/memberstory/:memberName?',(req,res)=>{
+    const memberName = req.params.memberName || ''
+    console.log(req.params.memberName)
+    db.query(`SELECT * FROM story WHERE username = '${memberName}' ORDER BY cid DESC`)
+        .then(([rows])=>{
+            res.json(rows);
+        })
+})
+
+//顯示按讚文章資料July9
+router.get('/memberstoryloved',(req,res)=>{
+    const memberName = req.params.memberName || ''
+    console.log(req.params.memberName)
+    db.query(`SELECT * FROM story WHERE completed = 1 ORDER BY cid DESC`)
+        .then(([rows])=>{
+            res.json(rows);
+        })
+})
+
+//刪除文章資料July9
+router.delete('/memberstory/:id', (req, res)=>{
+    const output = {success:false};
+    //let referer = req.get('Referer'); // 從哪裡來
+    const sql = "DELETE FROM `story` WHERE `story`.`id` = ? ";
+    console.log(req.params.id);
+
+    db.query(sql, [req.params.id])
+        .then(([r])=>{
+        if(r.affectedRows && r.insertId){
+            output.success = true;
+        }
+        res.json(output);
+    })
+});
+
 //真正存圖片
 router.post('/try-upload2', upload.single('avatar'), (req, res)=>{
     res.json({
